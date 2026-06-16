@@ -1,0 +1,76 @@
+version: "3.9"
+
+services:
+  # ── FastAPI Backend (Mini App + API) ─────────────────────────
+  app:
+    build: ./backend
+    container_name: foxdonat_app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - DATABASE_URL=postgresql://foxdonat:${DB_PASSWORD}@db:5432/foxdonat
+      - DEBUG=false
+      - SECRET_KEY=${SECRET_KEY}
+      - SMILEONE_MERCHANT_CODE=${SMILEONE_MERCHANT_CODE}
+      - SMILEONE_MERCHANT_KEY=${SMILEONE_MERCHANT_KEY}
+      - MIDASBUY_PARTNER_ID=${MIDASBUY_PARTNER_ID}
+      - MIDASBUY_SECRET=${MIDASBUY_SECRET}
+      - PAYME_MERCHANT_ID=${PAYME_MERCHANT_ID}
+      - PAYME_SECRET_KEY=${PAYME_SECRET_KEY}
+      - CLICK_MERCHANT_ID=${CLICK_MERCHANT_ID}
+      - CLICK_SECRET_KEY=${CLICK_SECRET_KEY}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - app_uploads:/app/uploads
+
+  # ── Telegram Bot ──────────────────────────────────────────────
+  bot:
+    build: ./backend
+    container_name: foxdonat_bot
+    restart: unless-stopped
+    command: python bot.py
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - DATABASE_URL=postgresql://foxdonat:${DB_PASSWORD}@db:5432/foxdonat
+      - DEBUG=false
+    depends_on:
+      - app
+
+  # ── PostgreSQL ────────────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: foxdonat_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: foxdonat
+      POSTGRES_USER: foxdonat
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U foxdonat"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ── Nginx reverse proxy ───────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: foxdonat_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    depends_on:
+      - app
+
+volumes:
+  pg_data:
+  app_uploads:

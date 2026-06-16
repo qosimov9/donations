@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a0f08" />
+  <title>FOX DONAT — Донат в любимые игры</title>
+  <meta name="description" content="Пополняй баланс и донать в Mobile Legends, PUBG Mobile, Standoff 2, Free Fire и другие игры быстро и безопасно." />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/app.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <div class="phone">
+      <div id="screen-root" class="screen-root"></div>
+
+      <!-- Toast -->
+      <div id="toast" class="toast" role="status" hidden>
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span id="toast-text"></span>
+      </div>
+
+      <!-- Loading -->
+      <div id="loading-screen" class="loading-screen">
+        <div class="loading-inner">
+          <div class="loading-logo">🦊</div>
+          <p class="loading-title">FOX DONAT</p>
+          <div class="loading-bar"><div class="loading-fill" id="loading-fill"></div></div>
+        </div>
+      </div>
+
+      <!-- Bottom navigation -->
+      <nav id="bottom-nav" class="bottom-nav" aria-label="Главное меню">
+        <ul class="nav-list">
+          <li><button type="button" class="nav-btn" data-tab="home">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+            <span>Главная</span>
+          </button></li>
+          <li><button type="button" class="nav-btn" data-tab="games">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            <span>Игры</span>
+          </button></li>
+          <li><button type="button" class="nav-btn" data-tab="history">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9z"/><path d="M15 3v6h6"/><path d="M8 13h8M8 17h6"/></svg>
+            <span>История</span>
+          </button></li>
+          <li><button type="button" class="nav-btn" data-tab="topup">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            <span>Пополнить</span>
+          </button></li>
+          <li><button type="button" class="nav-btn" data-tab="settings">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>Настройка</span>
+          </button></li>
+        </ul>
+      </nav>
+    </div>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
