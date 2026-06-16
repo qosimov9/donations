@@ -63,9 +63,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
-
+templates = Jinja2Templates(directory="backend/templates")
+app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 
 # ──────────────────────────────────────────────────────────────────────────────
 # TELEGRAM AUTH
